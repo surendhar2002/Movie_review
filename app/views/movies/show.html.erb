@@ -1,0 +1,36 @@
+<div class="container-sm" style="max-width: 50rem">
+  <p>
+    <strong>Name:</strong>
+    <%= @movie.name %>
+  </p>
+
+  <p>
+    <strong>Release date:</strong>
+    <%= @movie.re_date %>
+  </p>
+
+  <p>
+    <strong>Ratings: </strong>
+    <% @ratings.each do |star, count| %>
+      <span style="margin: 0 5px">
+        <%= "#{star}⭐(#{count})" %>
+      </span>
+    <%end %>
+  </p>
+
+  <div style="padding: 10px 0">
+    <h3>Add Rating:</h3>
+    <%= render 'ratings/form'%>
+  </div>
+
+  <hr>
+  <%= render "reviews/reviews" %>
+  <hr>
+  <h1>Add Reviews</h1>
+  <%= render "reviews/form" %>
+
+  <%= link_to 'Edit', edit_movie_path(@movie) %> |
+  <%= link_to 'Back', movies_path %>
+
+</div>
+

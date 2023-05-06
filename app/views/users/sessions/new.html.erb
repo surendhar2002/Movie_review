@@ -1,0 +1,47 @@
+<div class="card container-md" style="width: 21rem; min-height: 26rem; height: auto">
+  <br><h1 class="text-center" style="color: blue">Login</h1><br>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <p class="text-center" ,id="alert", style="color: #B00100">
+      <%= alert %>
+    </p>
+
+    <p>
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",:class => "form-control", placeholder: "Email"  %>
+      </div>
+    </p>
+
+    <p>
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "current-password",:class => "form-control", placeholder: "Password" %>
+    </div>
+    </p>
+
+    <p>
+      <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+    </p>
+
+    <p><%= render "users/shared/links" %></p>
+
+    <div class="actions">
+      <%= f.submit "Log in",:class => 'btn btn-primary w-100' %>
+    </div>
+
+    <p>
+      <div class="text-center">
+        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+          Create Account?  <%= link_to "Sign up", new_registration_path(resource_name)  %>
+        <% end %>
+      </div>
+    </p>
+
+  <% end %>
+
+
+</div>

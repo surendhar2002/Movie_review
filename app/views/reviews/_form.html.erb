@@ -1,0 +1,11 @@
+<%= form_with(model: [@movie, @movie.reviews.build]) do |f| %>
+
+  <p>
+    <%= f.text_area :text, :class => 'form-control review-body'  %>
+  </p>
+
+  <p>
+    <%= f.submit "Add Review",:class => "btn btn-primary"%>
+  </p>
+
+<%end %>

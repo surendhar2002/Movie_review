@@ -1,0 +1,65 @@
+<div style="position:absolute;top:100px;width: 100%">
+  <h1> Movies</h1>
+
+  <form class="d-flex" action="<%= movies_path %>" method="get" style="position: absolute;right:50px;top:4px">
+    <input type="text" name="search"  value="<%= params[:search] %>" placeholder="Search Movies" class="form-control me-2" style="height: 35px;width: 200px;" >
+    <button type="submit" class="btn btn-outline-success" style="height: 35px; width: 80px;">Search</button>
+  </form>
+
+  <div class="d-flex" style="position: absolute;right:400px;top:4px">
+    <% unless params[:start_date].present? %>
+      <%= form_tag(movies_url, method: :get) do %>
+        <%= label_tag :start_date, "Start Date" %>
+        <%= date_field_tag :start_date, params[:start_date]%>
+
+        <%= label_tag :end_date, "End Date" %>
+        <%= date_field_tag :end_date, params[:end_date]%>
+        <%= submit_tag "Filter",class:"btn btn-outline-success",style:"height: 35px; width: 80px;" %>
+      <% end %>
+    <%end %>
+  </div>
+
+  <table class="table table-striped table-hover table-bordered" >
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Release date</th>
+      <th>Review Count</th>
+      <th>Average Ratings</th>
+      <th colspan="3">Action</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.name %></td>
+        <td><%= movie.re_date %></td>
+        <td><%= pluralize(movie.reviews_count, 'Review') %></td>
+        <td>
+          <% if movie.ratings.any? %>
+            <%= movie.ratings_average %>
+          <%else%>
+            0
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', movie %></td>
+        <td><%= link_to 'Edit', edit_movie_path(movie) if can? :edit, movie %></td>
+        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, movie%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <%= link_to 'New Movie', new_movie_path, :class => 'btn btn-outline-primary movie-create' %>
+
+  <br><br>
+  <div class="apple_pagination">
+    <%= will_paginate @movies, :container => false %>
+  </div>
+  <br>
+
+</div>
+
