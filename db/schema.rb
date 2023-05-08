@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_06_091105) do
+ActiveRecord::Schema.define(version: 2023_05_08_051704) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "movies", force: :cascade do |t|
     t.string "name"
@@ -18,13 +21,13 @@ ActiveRecord::Schema.define(version: 2023_05_06_091105) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "reviews_count"
-    t.float "ratings_average"
+    t.float "ratings_average", default: 0.0
   end
 
   create_table "ratings", force: :cascade do |t|
     t.integer "star"
-    t.integer "movie_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_ratings_on_movie_id"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 2023_05_06_091105) do
 
   create_table "reviews", force: :cascade do |t|
     t.text "text"
-    t.integer "movie_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_reviews_on_movie_id"

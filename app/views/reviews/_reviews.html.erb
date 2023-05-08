@@ -8,7 +8,7 @@
         <p><strong>Review :</strong><%= review.text %></p>
         <p>
           <% if can? :manage ,review %>
-            <%= link_to 'Edit', edit_movie_review_path(review) %> |
+            <%= link_to 'Edit', edit_movie_review_path(@movie,review) %> |
             <%= link_to 'Delete Review',movie_review_path(@movie,review), method: :delete ,data:{confirm: 'Are you sure?...'}%>
           <%end %>
         </p>

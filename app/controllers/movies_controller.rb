@@ -20,6 +20,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
+    @review=Review.new
     default_ratings = Hash[(1..5).reverse_each.map { |n| [n, 0] }]
     @ratings = default_ratings.merge @movie.ratings.group(:star).count
     @rating = current_user.ratings.find_by(movie_id: @movie.id) || Rating.new(movie: @movie)

@@ -20,7 +20,11 @@
 
   <div style="padding: 10px 0">
     <h3>Add Rating:</h3>
-    <%= render 'ratings/form'%>
+    <% if @rating.persisted? %>
+      You gave <%= @rating.star%> Star Rating <%= link_to 'Edit', edit_movie_rating_path(@movie,@rating)%>
+    <%else %>
+      <%= render 'ratings/form'%>
+    <%end%>
   </div>
 
   <hr>
@@ -29,7 +33,7 @@
   <h1>Add Reviews</h1>
   <%= render "reviews/form" %>
 
-  <%= link_to 'Edit', edit_movie_path(@movie) %> |
+  <%= link_to 'Edit', edit_movie_path(@movie) if can? :manage, @movie %> |
   <%= link_to 'Back', movies_path %>
 
 </div>

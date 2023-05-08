@@ -37,13 +37,7 @@
         <td><%= movie.name %></td>
         <td><%= movie.re_date %></td>
         <td><%= pluralize(movie.reviews_count, 'Review') %></td>
-        <td>
-          <% if movie.ratings.any? %>
-            <%= movie.ratings_average %>
-          <%else%>
-            0
-          <% end %>
-        </td>
+        <td><%= movie.ratings_average %></td>
         <td><%= link_to 'Show', movie %></td>
         <td><%= link_to 'Edit', edit_movie_path(movie) if can? :edit, movie %></td>
         <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, movie%></td>

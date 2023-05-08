@@ -1,4 +1,4 @@
-<%= form_with(model: [@movie, @movie.ratings.build]) do |form| %>
+<%= form_with(model: [@movie,@rating]) do |form| %>
   <div>
     <%= form.label :star %>
     <%= form.collection_radio_buttons :star, (1..5).reverse_each.map { |n| [n, "#{n}⭐"] }, :first, :last do |b| %>
